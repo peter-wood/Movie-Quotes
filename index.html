@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Movie Quotes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body style="margin-top:12%;margin-bottom:7%"> 
+<div ng-app="myApp" ng-controller="dbGet">
+    <!-- HEADER -->
+    <div style="top:0;position:fixed;height:10%;width:100%" class="w3-container w3-teal w3-center">
+        <h1>Movie Quotes</h1>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="w3-container">
+
+        <!-- STATUS MESSAGE -->
+        <div class="{{statClass}}">
+            <i>{{statMsg}}</i>
+        </div>
+
+        <!-- LOAD NEW QUIZ -->
+        <div class="w3-container w3-center">
+            <button ng-click="loadQuiz()" 
+                    class="w3-btn w3-teal ">
+                Load a new quiz.
+            </button>
+        </div>
+        <br/>
+
+        <!-- ERROR MESSAGE -->
+        <div class="w3-panel w3-red" ng-show="error">
+            <h3>Error</h3>
+            <p>Unable to connect to database. Try to refresh the page. We are working to resolve the issue.</p>
+        </div> 
+
+            <!-- QUIZ -->
+            <div class="w3-container w3-center">
+                <span ng-repeat="l in letters" 
+                      ng-mouseenter="hoverHandler(l)"
+                      ng-mouseleave="outHandler(l)"
+                      ng-click="clickHandler(l)"
+                      ng-class="findClass(l)"
+                      id="{{l.index}}">
+                    {{l.letter}}
+                </span> 
+            </div>
+
+        <!-- INFO -->
+        <br/>
+        <div class="w3-display-container">
+            <div class="w3-padding w3-display-left"><i>{{source}}</div>
+            <div class="w3-padding w3-display-right"><i>{{year}}</div>
+        </div> 
+
+        <!-- KEYBOARD -->
+        <div class="w3-panel w3-sand w3-center">
+            <p class="w3-bar">
+                <span ng-repeat = "k in firstRow"
+                 ng-click="keyboardClick($event)"
+                 ng-class = "keyboardActive()">
+                    {{k}}
+                </span>
+            </p><br/>
+            <p class="w3-bar">
+                <span ng-repeat = "k in secondRow"
+                 ng-click="keyboardClick($event)"
+                 ng-class = "keyboardActive()">
+                    {{k}}
+                </span>
+            </p><br/>
+            <p class="w3-bar">
+                <span ng-repeat = "k in thirdRow"
+                 ng-click="keyboardClick($event)"
+                 ng-class = "keyboardActive()">
+                    {{k}}
+                </span>
+            </p>
+        </div>
+
+        <!-- CHEAT MODE -->
+        <button ng-click="openCheat=!openCheat" 
+                class="w3-btn w3-block w3-black w3-center">
+            Start cheat mode.
+        </button>
+        <div ng-class="cheatMode()">
+            <table class="w3-table w3-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Quote</th>
+                    <th>Source</th>
+                    <th>Year</th>
+                </tr>
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{quote}}</td>
+                    <td>{{source}}</td>
+                    <td>{{year}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <br/>
+    <div style="bottom:0;position:fixed;height:5%;width:100%" class="w3-container w3-center w3-teal">
+        <p>(c) 2018 by Peter Wood</p>
+    </div>
+</div>
+</body>
+</html>
